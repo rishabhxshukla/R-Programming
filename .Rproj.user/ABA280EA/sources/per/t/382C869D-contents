@@ -1,0 +1,16 @@
+View(s0)
+summary(s0)
+
+s0 <- read.csv(file.choose(), stringsAsFactors = TRUE)
+
+s0$Sales[is.na(s0$Sales)] <- runif(n = sum(is.na(s0$Sales)),
+                                   min = min(s0$Sales, na.rm = TRUE),
+                                   max = max(s0$Sales, na.rm = TRUE))
+
+s0$Profit[is.na(s0$Profit)] <- runif(n = sum(is.na(s0$Profit)),
+                                     min = min(s0$Profit, na.rm = TRUE),
+                                     max = max(s0$Profit, na.rm = TRUE))
+
+s0$Unit$Price[is.na(s0$Unit$Price)] <- runif(n = sum(is.na(s0$Unit$Price)),
+                                     min = min(s0$Unit$Price, na.rm = TRUE),
+                                     max = max(s0$Unit$Price, na.rm = TRUE))

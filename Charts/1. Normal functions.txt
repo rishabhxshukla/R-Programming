@@ -1,0 +1,5 @@
+barplot
+boxplot
+plot
+pie
+hist

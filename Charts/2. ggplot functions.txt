@@ -1,0 +1,5 @@
+geom_bar
+geom_boxplot
+geom_line
+geom_points
+geom_quantile
