@@ -39,12 +39,21 @@ data_train_labels <- data[1 : 469, 1]
 data_test_labels <- data[470 : 569, 1]
 
 
-install.packages("class")
+#install.packages("class")
 library(class)
 
 
 data_test_pred <- knn(train = data_train, test = data_test,
-                      c1 = data_train_labels, k = 21)
+                      cl = data_train_labels, k = 21)
 
 
-install.packages("gmodels")
+#install.packages("gmodels")
+library(gmodels)
+
+CrossTable(x = data_test_labels , y = data_test_pred,
+           prop.chisq = FALSE)
+
+aa <- table(data_test_labels, data_test_pred)
+
+library(caret)
+confusionMatrix(aa)
