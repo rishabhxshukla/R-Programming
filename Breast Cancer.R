@@ -1,5 +1,5 @@
 #Loading the dataset
-data <- read.csv("Breast Cancer Dataset.csv")
+data <- read.csv("Breast Cancer.csv")
 
 #Printing the dataset
 print(data)

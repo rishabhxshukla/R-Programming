@@ -1,35 +1,51 @@
-# Step 1: Load the necessary packages
-library(e1071)
+# Load the packages & the dataset
 library(caret)
+library(e1071)
+data <- read.csv("Play Tennis.csv", stringsAsFactors = FALSE)
+View(data)
 
-# Import the "Play Tennis" dataset
-play_tennis <- read.csv("Play Tennis.csv", stringsAsFactors = FALSE)
 
 # Set a seed for reproducibility
 set.seed(123)
 
 
-# Step 2: Split the dataset into a training set and a testing set (70% training and 30% testing)
-splitIndex <- createDataPartition(play_tennis$play, p = 0.7, list = FALSE)
-training_data <- play_tennis[splitIndex, ]
-testing_data <- play_tennis[-splitIndex, ]
+# Split the dataset into train and test set (70% training and 30% testing)
+splitIndex <- createDataPartition(data$play, p = 0.7, list = FALSE)
+train <- data[splitIndex, ]
+test <- data[-splitIndex, ]
 
 
-# Step 3: Build the Naive Bayes classifier
-# 'PlayTennis' is the target variable, and '~ .' specifies to use all other columns as features
-nb_model <- naiveBayes(play ~ ., data = training_data)
+# Build the Naive Bayes classifier using training dataset
+# The target column is Species
+# naiveBayes(target_column, train_file)
+model <- naiveBayes(play~., data = train)
 
 
-# Step 4: Make predictions on the testing dataset
-predictions <- predict(nb_model, testing_data)
+# Make predictions on the testing dataset
+# predict(model, test_file)
+pred <- predict(model, test)
 
 
-# Step 5: Evaluate the model
-# Create a confusion matrix
-confusion_matrix <- table(Actual = testing_data$play, Predicted = predictions)
+# Creating a table
+table(pred)
+table(test$play)
+
+
+# Building a confusion matrix
+# ConfusionMatrix(original_data, predicted_data)
+confusion_matrix <- table(Actual = test$play, Predicted = pred)
 print("Confusion Matrix:")
 print(confusion_matrix)
 
+
 # Calculate accuracy
+# Left-to-Right diagonal of CM contains the correct results
+# Right-to-Left diagonal of CM contains the wrong results
+# (True Positive, True Negative)
+# (Accuracy = Total correct results / All the results)
 accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+print(paste("Accuracy:", accuracy))
+
+# This means that, to find accuracy we can also do this :
+accuracy <- (1 + 1) / (1 + 0 + 1 + 1)
 print(paste("Accuracy:", accuracy))
