@@ -33,19 +33,18 @@ table(test$play)
 
 # Building a confusion matrix
 # ConfusionMatrix(original_data, predicted_data)
-confusion_matrix <- table(Actual = test$play, Predicted = pred)
+result <- table(Actual = test$play, Predicted = pred)
 print("Confusion Matrix:")
-print(confusion_matrix)
+result
 
 
-# Calculate accuracy
-# Left-to-Right diagonal of CM contains the correct results
-# Right-to-Left diagonal of CM contains the wrong results
-# (True Positive, True Negative)
+# Calculate the accuracy
+# Left-to-Right diagonal of CM contains the correct results (True Positive)
+# Right-to-Left diagonal of CM contains the wrong results (True Negative)
 # (Accuracy = Total correct results / All the results)
-accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
-print(paste("Accuracy:", accuracy))
+accuracy <- sum(diag(result)) / sum(result)
+round(accuracy * 100)
 
 # This means that, to find accuracy we can also do this :
 accuracy <- (1 + 1) / (1 + 0 + 1 + 1)
-print(paste("Accuracy:", accuracy))
+round(accuracy * 100)
