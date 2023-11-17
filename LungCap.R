@@ -7,10 +7,10 @@ plot(Age, LungCap)
 
 ?lm
 
-relation = lm(LungCap~Age)
+model = lm(LungCap ~ Age, data = data)
 plot(Age, LungCap)
-abline(relation, col=2, lwd=3)
+abline(model, col=2, lwd=3)
 
 test <- data.frame(Age = 50)
-ans <- predict(relation, test)
+ans <- predict(model, test)
 paste("LungCap :", ans)

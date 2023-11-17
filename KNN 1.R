@@ -40,8 +40,8 @@ nrow(data_nor)
 data_train <- data_nor[1 : 455, ]
 data_test <- data_nor[456 : 569, ]
 # Giving labels which are present in column-1 : Benign, Malignant
-data_train_labels <- data[1 : 455, 1]
-data_test_labels <- data[456 : 569, 1]
+train_labels <- data[1 : 455, 1]
+test_labels <- data[456 : 569, 1]
 
 
 #install.packages("class")
@@ -55,12 +55,12 @@ sqrt(nrow(data))
 
 
 # Training model on data
-data_test_pred <- knn(train = data_train, test = data_test,
-                      cl = data_train_labels, k = 23)
+prediction <- knn(train = data_train, test = data_test,
+                      cl = train_labels, k = 23)
 
 
 # Evaluating the model performance
-result <- table(data_test_labels, data_test_pred)
+result <- table(test_labels, prediction)
 result
 
 # Calculate the accuracy
